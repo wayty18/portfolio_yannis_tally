@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yannis TALLY — Data Analyst</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #1d1d1f;
+      --gray:    #6e6e73;
+      --light:   #f5f5f7;
+      --white:   #ffffff;
+      --accent:  #0071e3;
+      --accent2: #005bb5;
+      --radius:  14px;
+      --shadow:  0 4px 24px rgba(0,0,0,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 96px 0; }
+    .section--alt { background: var(--light); }
+
+    .tag {
+      display: inline-block;
+      background: var(--light);
+      color: var(--gray);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    h2.section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    p.section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 640px;
+      margin-bottom: 56px;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .85rem;
+      color: var(--gray);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    /* ===== LANGUAGE SWITCHER ===== */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--gray);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all .2s;
+      background: none;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      color: var(--black);
+      border-color: rgba(0,0,0,.12);
+      background: var(--white);
+    }
+
+    .flag-img {
+      width: 20px;
+      height: 14px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 96px;
+      text-align: center;
+    }
+
+    .hero-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 32px;
+      box-shadow: 0 0 0 4px var(--white), 0 0 0 6px rgba(0,0,0,.08);
+    }
+
+    .hero-eyebrow {
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 980px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--accent2); }
+
+    .btn-secondary {
+      background: var(--light);
+      color: var(--black);
+    }
+    .btn-secondary:hover { background: #e8e8ed; }
+
+    /* ===== DIFFERENTIATORS ===== */
+    .diff-banner {
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .diff-item {
+      flex: 1;
+      padding: 32px 24px;
+      text-align: center;
+      background: var(--white);
+      border-right: 1px solid var(--light);
+    }
+    .diff-item:last-child { border-right: none; }
+
+    .diff-item .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .diff-item p {
+      font-size: .85rem;
+      color: var(--gray);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-text p { color: var(--gray); margin-bottom: 16px; font-size: 1.02rem; }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .highlight-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .highlight-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+    .highlight-card p  { font-size: .85rem; color: var(--gray); }
+
+    /* ===== SECTORS ===== */
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .sector-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform .2s;
+    }
+    .sector-card:hover { transform: translateY(-4px); }
+
+    .sector-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .sector-card h4    { font-size: .95rem; font-weight: 700; margin-bottom: 8px; }
+    .sector-card p     { font-size: .82rem; color: var(--gray); }
+
+    /* ===== SKILLS ===== */
+    .skills-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-cat {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .skill-cat h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: var(--light);
+      color: var(--black);
+      font-size: .8rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 32px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: var(--light);
+    }
+
+    .timeline-item { position: relative; margin-bottom: 48px; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-meta {
+      font-size: .8rem;
+      color: var(--gray);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item .company {
+      font-size: .9rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .timeline-item ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .timeline-item ul li {
+      font-size: .9rem;
+      color: var(--gray);
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .tools-used {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tool-badge {
+      background: rgba(0,113,227,.08);
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s;
+    }
+    .project-card:hover { transform: translateY(-4px); }
+
+    .project-card .proj-icon { font-size: 1.8rem; margin-bottom: 14px; }
+
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-size: .88rem;
+      color: var(--gray);
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .project-result {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0,113,227,.07);
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+
+    /* ===== EDUCATION ===== */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .edu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .edu-card .edu-year {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .edu-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .edu-card .school { font-size: .85rem; color: var(--gray); }
+
+    /* ===== CAROUSEL ===== */
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      overflow-x: auto;
+      padding: 16px 0;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-placeholder {
+      width: 100px;
+      height: 60px;
+      background: var(--light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--gray);
+      text-align: center;
+      padding: 8px;
+    }
+
+    .logo-img {
+      width: 100px;
+      height: 60px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: .7;
+      transition: all .3s;
+    }
+    .logo-img:hover { filter: grayscale(0%); opacity: 1; }
+
+    .carousel-item span {
+      font-size: .75rem;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-box {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 24px;
+      padding: 64px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,.6);
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: all .2s;
+    }
+
+    .contact-link--white {
+      background: var(--white);
+      color: var(--black);
+    }
+    .contact-link--white:hover { background: var(--light); }
+
+    .contact-link--outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.3);
+    }
+    .contact-link--outline:hover { border-color: var(--white); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: .82rem;
+      color: var(--gray);
+      border-top: 1px solid rgba(0,0,0,.06);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-highlights { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .contact-box { padding: 40px 24px; }
+      .section { padding: 64px 0; }
+      .diff-banner { flex-direction: column; }
+      .diff-item { border-right: none; border-bottom: 1px solid var(--light); }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Yannis TALLY</span>
+
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+      <li><a href="#sectors" data-i18n="nav.expertise">Expertise</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
+      <li><a href="#experience" data-i18n="nav.exp">Expériences</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+
+    <div class="lang-switcher">
+      <button type="button" class="lang-btn active" onclick="setLang('fr', event)" title="Français">
+        <img src="Flag_of_France.png" alt="FR" class="flag-img" /> FR
+      </button>
+      <button type="button" class="lang-btn" onclick="setLang('en', event)" title="English">
+        <img src="Flag_of_UK.png" alt="EN" class="flag-img" /> EN
+      </button>
+      <button type="button" class="lang-btn" onclick="setLang('es', event)" title="Español">
+        <img src="Flag_of_Spain.png" alt="ES" class="flag-img" /> ES
+      </button>
+      <button type="button" class="lang-btn" onclick="setLang('cr', event)" title="Créole Martiniquais">
+        <img src="Flag_of_Martinique.png" alt="CR" class="flag-img" /> CR
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <img
+      src="yannis_tally.jpg"
+      alt="Yannis TALLY"
+      class="hero-photo"
+    />
+
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Data Analyst · Orange France</p>
+
+    <h1 data-i18n="hero.title">
+      De la donnée brute<br />à la décision éclairée.
+    </h1>
+
+    <p class="hero-sub" data-i18n="hero.sub">
+      Polyvalent, orienté métier, passionné par la valorisation de la donnée.
+      Je parle le langage des algorithmes autant que celui des équipes.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary" data-i18n="hero.cta1">
+        🔍 Voir mes projets
+      </a>
+      <a href="#contact" class="btn btn-secondary" data-i18n="hero.cta2">
+        ✉️ Me contacter
+      </a>
+      <a href="CV Yannis TALLY.pdf" download class="btn btn-secondary" data-i18n="hero.cta3">
+        ⬇️ Télécharger mon CV
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIFFERENTIATORS ===== -->
+<section style="padding: 0 0 80px;">
+  <div class="container">
+    <div class="diff-banner">
+      <div class="diff-item">
+        <div class="num">7+</div>
+        <p data-i18n="diff.sectors">Secteurs métiers maîtrisés</p>
+      </div>
+      <div class="diff-item">
+        <div class="num">5+</div>
+        <p data-i18n="diff.exp">Années d'expérience professionnelle</p>
+      </div>
+      <div class="diff-item">
+        <div class="num">10+</div>
+        <p data-i18n="diff.tools">Outils data & IA</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="tag" data-i18n="about.tag">À propos</span>
+        <h2 class="section-title" data-i18n="about.title">
+          Un profil data ancré dans le réel.
+        </h2>
+        <p data-i18n="about.p1">
+          Passionné par la data et l'automatisation, j'ai construit un profil rare :
+          celui d'un analyste qui comprend les enjeux métier avant même d'ouvrir un dataset.
+        </p>
+        <p data-i18n="about.p2">
+          Mon parcours m'a conduit de la Martinique à Lyon, de la relation client bancaire
+          à l'analyse de données chez Orange, en passant par la communication, la qualité
+          et le marketing. Chaque étape a renforcé ma capacité à m'adapter, à comprendre
+          les besoins réels des équipes et à produire des analyses qui ont du sens.
+        </p>
+        <p data-i18n="about.p3">
+          Aujourd'hui, au sein de la Data Factory d'Orange, je conçois des pipelines de
+          données, des tableaux de bord interactifs et des automatisations Python — toujours
+          avec une obsession : que la donnée serve vraiment les décisions.
+        </p>
+      </div>
+
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="icon">🔄</div>
+          <h4 data-i18n="hl.poly">Polyvalence</h4>
+          <p data-i18n="hl.poly.sub">Banque, télécoms, commerce, énergie, agroalimentaire…</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🧭</div>
+          <h4 data-i18n="hl.adapt">Adaptabilité</h4>
+          <p data-i18n="hl.adapt.sub">Martinique → Lyon, startup → grand groupe</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🤖</div>
+          <h4 data-i18n="hl.ai">IA & Prompting</h4>
+          <p data-i18n="hl.ai.sub">ML, clustering, rédaction de prompts efficaces</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">📊</div>
+          <h4 data-i18n="hl.data">Data-driven</h4>
+          <p data-i18n="hl.data.sub">SQL, Python, Power BI, GCP, Snowflake, DBT</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTORS ===== -->
+<section class="section" id="sectors">
+  <div class="container">
+    <span class="tag" data-i18n="sectors.tag">Expertise métier</span>
+    <h2 class="section-title" data-i18n="sectors.title">
+      Je comprends vos données<br />parce que j'ai compris vos métiers.
+    </h2>
+    <p class="section-sub" data-i18n="sectors.sub">
+      Grâce à mes expériences dans des secteurs variés, j'aborde chaque projet data
+      avec une compréhension concrète des enjeux opérationnels.
+    </p>
+
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="icon">🏦</div>
+        <h4 data-i18n="sec.bank">Banque & Assurance</h4>
+        <p data-i18n="sec.bank.sub">Gestion du risque, relation client, KPI financiers, conformité</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">📡</div>
+        <h4 data-i18n="sec.telco">Télécommunications</h4>
+        <p data-i18n="sec.telco.sub">Pilotage opérationnel, data factory, automatisation, reporting</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">🛒</div>
+        <h4 data-i18n="sec.retail">Commerce & Distribution</h4>
+        <p data-i18n="sec.retail.sub">Gestion de stocks, qualité produit, analyse des ventes</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">⚡</div>
+        <h4 data-i18n="sec.energy">Énergie</h4>
+        <p data-i18n="sec.energy.sub">Appels d'offres, logistique, communication B2B</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">🌾</div>
+        <h4 data-i18n="sec.agri">Agroalimentaire</h4>
+        <p data-i18n="sec.agri.sub">Étude de marché internationale, clustering pays, PESTEL</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">📈</div>
+        <h4 data-i18n="sec.mkt">Marketing</h4>
+        <p data-i18n="sec.mkt.sub">Tableaux de bord, KPI, stratégie de développement commercial</p>
+      </div>
+      <div class="sector-card">
+        <div class="icon">🏗️</div>
+        <h4 data-i18n="sec.btp">BTP</h4>
+        <p data-i18n="sec.btp.sub">Suivi de projets, gestion des coûts et livrables</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="section section--alt" id="skills">
+  <div class="container">
+    <span class="tag" data-i18n="skills.tag">Compétences</span>
+    <h2 class="section-title" data-i18n="skills.title">Ma boîte à outils</h2>
+    <p class="section-sub" data-i18n="skills.sub">
+      Des compétences techniques solides, au service d'une vision orientée métier.
+    </p>
+
+    <div class="skills-categories">
+      <div class="skill-cat">
+        <h4 data-i18n="sk.viz">Analyse & Visualisation</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Looker Studio</span>
+          <span class="skill-tag" data-i18n="skill.excel">Excel Avancé</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4 data-i18n="sk.db">Bases de données & Requêtage</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">SQLite</span>
+          <span class="skill-tag">BigQuery</span>
+          <span class="skill-tag">DBT</span>
+          <span class="skill-tag">Snowflake</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4 data-i18n="sk.dev">Programmation & Automatisation</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Jupyter Notebook</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4 data-i18n="sk.cloud">Cloud & Infrastructure</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Microsoft 365</span>
+          <span class="skill-tag">SharePoint</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4 data-i18n="sk.ai">Intelligence Artificielle & ML</h4>
+        <div class="skill-tags">
+          <span class="skill-tag" data-i18n="skill.logreg">Régression Logistique</span>
+          <span class="skill-tag">Random Forest</span>
+          <span class="skill-tag">KNN</span>
+          <span class="skill-tag">K-Means</span>
+          <span class="skill-tag">ACP</span>
+          <span class="skill-tag">Clustering</span>
+          <span class="skill-tag">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <h4 data-i18n="sk.soft">Soft Skills</h4>
+        <div class="skill-tags">
+          <span class="skill-tag" data-i18n="skill.popularization">Vulgarisation</span>
+          <span class="skill-tag" data-i18n="skill.analytical">Esprit analytique</span>
+          <span class="skill-tag">Pédagogie</span>
+          <span class="skill-tag" data-i18n="skill.adaptability">Adaptabilité</span>
+          <span class="skill-tag" data-i18n="skill.teamwork">Travail en équipe</span>
+          <span class="skill-tag" data-i18n="skill.proactivity">Proactivité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="section" id="experience">
+  <div class="container">
+    <span class="tag" data-i18n="exp.tag">Expériences</span>
+    <h2 class="section-title" data-i18n="exp.title">Parcours professionnel</h2>
+    <p class="section-sub" data-i18n="exp.sub">
+      Un parcours transversal, forgé par des environnements variés et des responsabilités concrètes.
+    </p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-meta" data-i18n="xp1.meta">Sept. 2024 – Sept. 2026 · Lyon, France</div>
+        <h3 data-i18n="xp1.title">Data Analyst Junior (Alternance)</h3>
+        <div class="company" data-i18n="xp1.company">Orange — Direction de l'Intervention (DINT) · Data Factory</div>
+        <ul>
+          <li data-i18n="xp1.b1">Fiabilisation et valorisation des données via traitement et nettoyage</li>
+          <li data-i18n="xp1.b2">Conception de bases de données de référence pour la Data Factory</li>
+          <li data-i18n="xp1.b3">Pilotage de projets de bout en bout : cadrage, déploiement, accompagnement</li>
+          <li data-i18n="xp1.b4">Création de visualisations sur mesure pour faciliter la prise de décision</li>
+          <li data-i18n="xp1.b5">Développement d'automatisations Python pour améliorer la performance opérationnelle</li>
+        </ul>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">SQL</span>
+          <span class="tool-badge">Power BI</span>
+          <span class="tool-badge">GCP</span>
+          <span class="tool-badge">DBT</span>
+          <span class="tool-badge">Snowflake</span>
+          <span class="tool-badge">Looker Studio</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta" data-i18n="xp2.meta">Oct. 2022 – Oct. 2023 · Vénissieux, France</div>
+        <h3 data-i18n="xp2.title">Conseiller Financier Particuliers (CDI)</h3>
+        <div class="company" data-i18n="xp2.company">Crédit Agricole Centre-Est</div>
+        <ul>
+          <li data-i18n="xp2.b1">Gestion de portefeuille clients et accompagnement proactif via outils digitaux</li>
+          <li data-i18n="xp2.b2">Formation et intégration des nouveaux collaborateurs</li>
+          <li data-i18n="xp2.b3">Maîtrise des risques associés aux comptes et conformité</li>
+        </ul>
+        <div class="tools-used">
+          <span class="tool-badge" data-i18n="tool.client">Relation client</span>
+          <span class="tool-badge" data-i18n="tool.finance">Analyse financière</span>
+          <span class="tool-badge" data-i18n="tool.bankdigital">Outils digitaux bancaires</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta" data-i18n="xp3.meta">Sept. 2020 – présent · Martinique</div>
+        <h3 data-i18n="xp3.title">Chargé de Communication & Administratif</h3>
+        <div class="company" data-i18n="xp3.company">Sageer Caraïbes</div>
+        <ul>
+          <li data-i18n="xp3.b1">Définition et mise en place d'actions de communication</li>
+          <li data-i18n="xp3.b2">Élaboration de supports print & web, campagnes emailing</li>
+          <li data-i18n="xp3.b3">Réponse aux appels d'offres, logistique événementielle</li>
+        </ul>
+        <div class="tools-used">
+          <span class="tool-badge">Communication B2B</span>
+          <span class="tool-badge">Marketing</span>
+          <span class="tool-badge" data-i18n="tool.project">Gestion de projet</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta" data-i18n="xp4.meta">Fév. – Juin 2020 · France</div>
+        <h3 data-i18n="xp4.title">Responsable Qualité Pâtisserie</h3>
+        <div class="company" data-i18n="xp4.company">Carrefour Cluny</div>
+        <ul>
+          <li data-i18n="xp4.b1">Gestion du processus qualité et mise en place d'outils conformes aux normes sanitaires</li>
+          <li data-i18n="xp4.b2">Gestion de plus de 40 références produits (stocks, mise en rayon, contrôle qualité)</li>
+        </ul>
+        <div class="tools-used">
+          <span class="tool-badge" data-i18n="tool.quality">Qualité</span>
+          <span class="tool-badge" data-i18n="tool.stock">Gestion de stocks</span>
+          <span class="tool-badge" data-i18n="tool.rigor">Rigueur opérationnelle</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="section section--alt" id="projects">
+  <div class="container">
+    <span class="tag" data-i18n="proj.tag">Projets</span>
+    <h2 class="section-title" data-i18n="proj.title">Sélection de projets</h2>
+    <p class="section-sub" data-i18n="proj.sub">
+      Des projets concrets, variés, menés de l'exploration des données jusqu'aux recommandations stratégiques.
+    </p>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="proj-icon">🔍</div>
+        <h3 data-i18n="p1.title">Détection de faux billets (ML)</h3>
+        <p data-i18n="p1.desc">
+          Analyse de 1 500 billets scannés pour l'ONCFM. Test et comparaison de 4 algorithmes ML
+          (Régression Logistique, KNN, Random Forest, K-Means). Déploiement d'une application fonctionnelle.
+        </p>
+        <div class="project-result" data-i18n="p1.result">✅ Meilleure accuracy : 99,33%</div>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">Scikit-learn</span>
+          <span class="tool-badge">ML</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">📚</div>
+        <h3 data-i18n="p2.title">Analyse des ventes — Librairie Lapage</h3>
+        <p data-i18n="p2.desc">
+          Analyse exploratoire complète, tests statistiques (Khi², Spearman, Kruskal-Wallis),
+          identification du cœur de cible (35–55 ans), recommandations stratégiques BtoB.
+        </p>
+        <div class="project-result" data-i18n="p2.result">✅ Recommandations stratégiques actionnables</div>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">Pandas</span>
+          <span class="tool-badge" data-i18n="tool.stats">Tests statistiques</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">🌍</div>
+        <h3 data-i18n="p3.title">Étude de marché internationale — Agroalimentaire</h3>
+        <p data-i18n="p3.desc">
+          Identification des marchés cibles pour une expansion internationale d'une entreprise
+          de poulet biologique. Clustering de 6 profils pays via ACP.
+        </p>
+        <div class="project-result" data-i18n="p3.result">✅ Recommandation : Allemagne, Pays-Bas, Arabie Saoudite, Chine</div>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">ACP</span>
+          <span class="tool-badge">Clustering</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">🎓</div>
+        <h3 data-i18n="p4.title">Suivi sociodémographique des étudiants Data</h3>
+        <p data-i18n="p4.desc">
+          Pipeline complet de traitement de données (staging, tests, intermediate).
+          Analyse de la répartition hommes/femmes par région, évolution des inscriptions.
+        </p>
+        <div class="project-result" data-i18n="p4.result">✅ Recommandations pour féminiser la filière data</div>
+        <div class="tools-used">
+          <span class="tool-badge">Snowflake</span>
+          <span class="tool-badge">DBT</span>
+          <span class="tool-badge">Looker Studio</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">📊</div>
+        <h3 data-i18n="p5.title">Cockpit de suivi de projets (Power BI)</h3>
+        <p data-i18n="p5.desc">
+          Tableau de bord interactif multi-vues : suivi des coûts, deadlines et livrables.
+          Analyse géographique et catégorielle. Documentation complète du modèle de données.
+        </p>
+        <div class="project-result" data-i18n="p5.result">✅ Dashboard complet avec DAX et modèle relationnel</div>
+        <div class="tools-used">
+          <span class="tool-badge">Power BI</span>
+          <span class="tool-badge">DAX</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">💧</div>
+        <h3 data-i18n="p6.title">Accès à l'eau potable dans le monde</h3>
+        <p data-i18n="p6.desc">
+          Visualisation mondiale, continentale et nationale de l'accès à l'eau potable.
+          Analyse de l'impact de la stabilité politique sur la mortalité liée à l'eau.
+        </p>
+        <div class="project-result" data-i18n="p6.result">✅ Cartographie interactive multi-niveaux</div>
+        <div class="tools-used">
+          <span class="tool-badge">Power BI</span>
+          <span class="tool-badge" data-i18n="tool.mapping">Cartographie</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">🍷</div>
+        <h3 data-i18n="p7.title">Analyse des ventes — BottleNeck (Cave à vins)</h3>
+        <p data-i18n="p7.desc">
+          Fusion de données issues d'un site e-commerce et d'un ERP. Analyse univariée des prix,
+          corrélations CA/stocks/marges. Identification d'anomalies de saisie et recommandations
+          pour améliorer la qualité des données.
+        </p>
+        <div class="project-result" data-i18n="p7.result">✅ Recommandations qualité données & plan d'action</div>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">Pandas</span>
+          <span class="tool-badge" data-i18n="tool.statistics">Statistiques</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-icon">🌐</div>
+        <h3 data-i18n="p8.title">Étude de santé publique — Sous-nutrition mondiale (FAO)</h3>
+        <p data-i18n="p8.desc">
+          Analyse des données FAO sur la sous-nutrition mondiale. Calcul de la proportion de
+          personnes sous-alimentées (7,1 % en 2017). Identification des 10 pays les plus touchés
+          et analyse de l'aide alimentaire internationale.
+        </p>
+        <div class="project-result" data-i18n="p8.result">✅ 123 % de la population mondiale pourrait être nourrie avec les ressources disponibles</div>
+        <div class="tools-used">
+          <span class="tool-badge">Python</span>
+          <span class="tool-badge">Pandas</span>
+          <span class="tool-badge">Matplotlib</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section class="section" id="education">
+  <div class="container">
+    <span class="tag" data-i18n="edu.tag">Formations</span>
+    <h2 class="section-title" data-i18n="edu.title">Parcours académique</h2>
+    <p class="section-sub" data-i18n="edu.sub">
+      Une formation pluridisciplinaire, du commerce à l'intelligence artificielle.
+    </p>
+
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-year">2024 – 2026</div>
+        <h4 data-i18n="e1.title">Mastère IA & Big Data (RNCP Niv. 6)</h4>
+        <div class="school">CFA Orange Formation</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2020 – 2022</div>
+        <h4 data-i18n="e2.title">Mastère Marketing & Développement Commercial</h4>
+        <div class="school">ESG Lyon</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2017 – 2020</div>
+        <h4 data-i18n="e3.title">Bachelor Marketing, Gestion & Commerce</h4>
+        <div class="school">EGC Martinique</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2015 – 2017</div>
+        <h4 data-i18n="e4.title">Baccalauréat ES</h4>
+        <div class="school">Cité Scolaire Rama</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAROUSEL ENTREPRISES ===== -->
+<section class="section section--alt">
+  <div class="container">
+    <span class="tag" data-i18n="car.tag">Entreprises & Écoles</span>
+    <h2 class="section-title" data-i18n="car.title">Ils m'ont fait confiance</h2>
+
+    <div class="carousel-track">
+
+      <div class="carousel-item">
+        <img src="Orange_logo.jpg" alt="Orange" class="logo-img" />
+        <span>Orange</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="credit_agricole_logo.jpg" alt="Crédit Agricole" class="logo-img" />
+        <span>Crédit Agricole</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="sageer_caraibes.jpg" alt="Sageer Caraïbes" class="logo-img" />
+        <span>Sageer Caraïbes</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="carrefour_logo.png" alt="Carrefour" class="logo-img" />
+        <span>Carrefour</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="Logo_ESG.png" alt="ESG Lyon" class="logo-img" />
+        <span>ESG Lyon</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="logo-egc.png" alt="EGC Martinique" class="logo-img" />
+        <span>EGC Martinique</span>
+      </div>
+
+      <div class="carousel-item">
+        <img src="Logo_OpenClassrooms.png" alt="OpenClassrooms" class="logo-img" />
+        <span>OpenClassrooms</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-box">
+      <h2 data-i18n="contact.title">Parlons de votre projet data.</h2>
+      <p data-i18n="contact.sub">
+        Vous avez un projet data ? Une question ? Je suis disponible pour en discuter.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:y.tally@orange.fr" class="contact-link contact-link--white">
+          ✉️ y.tally@orange.fr
+        </a>
+        <a
+          href="http://www.linkedin.com/in/yannis-tally-76b432196"
+          target="_blank"
+          rel="noopener"
+          class="contact-link contact-link--outline"
+        >
+          🔗 LinkedIn
+        </a>
+        <a href="CV Yannis TALLY.pdf" download class="contact-link contact-link--outline" data-i18n="contact.cv">
+          ⬇️ Télécharger mon CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p data-i18n="footer.text">© 2025 Yannis TALLY · Data Analyst · Lyon, France</p>
+</footer>
+
+<!-- ===== I18N ===== -->
+<script>
+const translations = {
+  fr: {
+    "nav.about": "À propos",
+    "nav.expertise": "Expertise",
+    "nav.skills": "Compétences",
+    "nav.exp": "Expériences",
+    "nav.projects": "Projets",
+    "nav.contact": "Contact",
+
+    "hero.eyebrow": "Data Analyst · Orange France",
+    "hero.title": "De la donnée brute<br />à la décision éclairée.",
+    "hero.sub": "Polyvalent, orienté métier, passionné par la valorisation de la donnée. Je parle le langage des algorithmes autant que celui des équipes.",
+    "hero.cta1": "🔍 Voir mes projets",
+    "hero.cta2": "✉️ Me contacter",
+    "hero.cta3": "⬇️ Télécharger mon CV",
+
+    "diff.sectors": "Secteurs métiers maîtrisés",
+    "diff.exp": "Années d'expérience professionnelle",
+    "diff.tools": "Outils data & IA",
+
+    "about.tag": "À propos",
+    "about.title": "Un profil data ancré dans le réel.",
+    "about.p1": "Passionné par la data et l'automatisation, j'ai construit un profil rare : celui d'un analyste qui comprend les enjeux métier avant même d'ouvrir un dataset.",
+    "about.p2": "Mon parcours m'a conduit de la Martinique à Lyon, de la relation client bancaire à l'analyse de données chez Orange, en passant par la communication, la qualité et le marketing. Chaque étape a renforcé ma capacité à m'adapter, à comprendre les besoins réels des équipes et à produire des analyses qui ont du sens.",
+    "about.p3": "Aujourd'hui, au sein de la Data Factory d'Orange, je conçois des pipelines de données, des tableaux de bord interactifs et des automatisations Python — toujours avec une obsession : que la donnée serve vraiment les décisions.",
+
+    "hl.poly": "Polyvalence",
+    "hl.poly.sub": "Banque, télécoms, commerce, énergie, agroalimentaire…",
+    "hl.adapt": "Adaptabilité",
+    "hl.adapt.sub": "Martinique → Lyon, startup → grand groupe",
+    "hl.ai": "IA & Prompting",
+    "hl.ai.sub": "ML, clustering, rédaction de prompts efficaces",
+    "hl.data": "Data-driven",
+    "hl.data.sub": "SQL, Python, Power BI, GCP, Snowflake, DBT",
+
+    "sectors.tag": "Expertise métier",
+    "sectors.title": "Je comprends vos données<br />parce que j'ai compris vos métiers.",
+    "sectors.sub": "Grâce à mes expériences dans des secteurs variés, j'aborde chaque projet data avec une compréhension concrète des enjeux opérationnels.",
+    "sec.bank": "Banque & Assurance",
+    "sec.bank.sub": "Gestion du risque, relation client, KPI financiers, conformité",
+    "sec.telco": "Télécommunications",
+    "sec.telco.sub": "Pilotage opérationnel, data factory, automatisation, reporting",
+    "sec.retail": "Commerce & Distribution",
+    "sec.retail.sub": "Gestion de stocks, qualité produit, analyse des ventes",
+    "sec.energy": "Énergie",
+    "sec.energy.sub": "Appels d'offres, logistique, communication B2B",
+    "sec.agri": "Agroalimentaire",
+    "sec.agri.sub": "Étude de marché internationale, clustering pays, PESTEL",
+    "sec.mkt": "Marketing",
+    "sec.mkt.sub": "Tableaux de bord, KPI, stratégie de développement commercial",
+    "sec.btp": "BTP",
+    "sec.btp.sub": "Suivi de projets, gestion des coûts et livrables",
+
+    "skills.tag": "Compétences",
+    "skills.title": "Ma boîte à outils",
+    "skills.sub": "Des compétences techniques solides, au service d'une vision orientée métier.",
+    "sk.viz": "Analyse & Visualisation",
+    "sk.db": "Bases de données & Requêtage",
+    "sk.dev": "Programmation & Automatisation",
+    "sk.cloud": "Cloud & Infrastructure",
+    "sk.ai": "Intelligence Artificielle & ML",
+    "sk.soft": "Soft Skills",
+    "skill.excel": "Excel Avancé",
+    "skill.logreg": "Régression Logistique",
+    "skill.popularization": "Vulgarisation",
+    "skill.analytical": "Esprit analytique",
+    "skill.adaptability": "Adaptabilité",
+    "skill.teamwork": "Travail en équipe",
+    "skill.proactivity": "Proactivité",
+
+    "exp.tag": "Expériences",
+    "exp.title": "Parcours professionnel",
+    "exp.sub": "Un parcours transversal, forgé par des environnements variés et des responsabilités concrètes.",
+    "xp1.meta": "Sept. 2024 – Sept. 2026 · Lyon, France",
+    "xp1.title": "Data Analyst Junior (Alternance)",
+    "xp1.company": "Orange — Direction de l'Intervention (DINT) · Data Factory",
+    "xp1.b1": "Fiabilisation et valorisation des données via traitement et nettoyage",
+    "xp1.b2": "Conception de bases de données de référence pour la Data Factory",
+    "xp1.b3": "Pilotage de projets de bout en bout : cadrage, déploiement, accompagnement",
+    "xp1.b4": "Création de visualisations sur mesure pour faciliter la prise de décision",
+    "xp1.b5": "Développement d'automatisations Python pour améliorer la performance opérationnelle",
+    "xp2.meta": "Oct. 2022 – Oct. 2023 · Vénissieux, France",
+    "xp2.title": "Conseiller Financier Particuliers (CDI)",
+    "xp2.company": "Crédit Agricole Centre-Est",
+    "xp2.b1": "Gestion de portefeuille clients et accompagnement proactif via outils digitaux",
+    "xp2.b2": "Formation et intégration des nouveaux collaborateurs",
+    "xp2.b3": "Maîtrise des risques associés aux comptes et conformité",
+    "xp3.meta": "Sept. 2020 – présent · Martinique",
+    "xp3.title": "Chargé de Communication & Administratif",
+    "xp3.company": "Sageer Caraïbes",
+    "xp3.b1": "Définition et mise en place d'actions de communication",
+    "xp3.b2": "Élaboration de supports print & web, campagnes emailing",
+    "xp3.b3": "Réponse aux appels d'offres, logistique événementielle",
+    "xp4.meta": "Fév. – Juin 2020 · France",
+    "xp4.title": "Responsable Qualité Pâtisserie",
+    "xp4.company": "Carrefour Cluny",
+    "xp4.b1": "Gestion du processus qualité et mise en place d'outils conformes aux normes sanitaires",
+    "xp4.b2": "Gestion de plus de 40 références produits (stocks, mise en rayon, contrôle qualité)",
+
+    "tool.client": "Relation client",
+    "tool.finance": "Analyse financière",
+    "tool.bankdigital": "Outils digitaux bancaires",
+    "tool.project": "Gestion de projet",
+    "tool.quality": "Qualité",
+    "tool.stock": "Gestion de stocks",
+    "tool.rigor": "Rigueur opérationnelle",
+    "tool.stats": "Tests statistiques",
+    "tool.mapping": "Cartographie",
+    "tool.statistics": "Statistiques",
+
+    "proj.tag": "Projets",
+    "proj.title": "Sélection de projets",
+    "proj.sub": "Des projets concrets, variés, menés de l'exploration des données jusqu'aux recommandations stratégiques.",
+    "p1.title": "Détection de faux billets (ML)",
+    "p1.desc": "Analyse de 1 500 billets scannés pour l'ONCFM. Test et comparaison de 4 algorithmes ML (Régression Logistique, KNN, Random Forest, K-Means). Déploiement d'une application fonctionnelle.",
+    "p1.result": "✅ Meilleure accuracy : 99,33%",
+    "p2.title": "Analyse des ventes — Librairie Lapage",
+    "p2.desc": "Analyse exploratoire complète, tests statistiques (Khi², Spearman, Kruskal-Wallis), identification du cœur de cible (35–55 ans), recommandations stratégiques BtoB.",
+    "p2.result": "✅ Recommandations stratégiques actionnables",
+    "p3.title": "Étude de marché internationale — Agroalimentaire",
+    "p3.desc": "Identification des marchés cibles pour une expansion internationale d'une entreprise de poulet biologique. Clustering de 6 profils pays via ACP.",
+    "p3.result": "✅ Recommandation : Allemagne, Pays-Bas, Arabie Saoudite, Chine",
+    "p4.title": "Suivi sociodémographique des étudiants Data",
+    "p4.desc": "Pipeline complet de traitement de données (staging, tests, intermediate). Analyse de la répartition hommes/femmes par région, évolution des inscriptions.",
+    "p4.result": "✅ Recommandations pour féminiser la filière data",
+    "p5.title": "Cockpit de suivi de projets (Power BI)",
+    "p5.desc": "Tableau de bord interactif multi-vues : suivi des coûts, deadlines et livrables. Analyse géographique et catégorielle. Documentation complète du modèle de données.",
+    "p5.result": "✅ Dashboard complet avec DAX et modèle relationnel",
+    "p6.title": "Accès à l'eau potable dans le monde",
+    "p6.desc": "Visualisation mondiale, continentale et nationale de l'accès à l'eau potable. Analyse de l'impact de la stabilité politique sur la mortalité liée à l'eau.",
+    "p6.result": "✅ Cartographie interactive multi-niveaux",
+    "p7.title": "Analyse des ventes — BottleNeck (Cave à vins)",
+    "p7.desc": "Fusion de données issues d'un site e-commerce et d'un ERP. Analyse univariée des prix, corrélations CA/stocks/marges. Identification d'anomalies de saisie et recommandations pour améliorer la qualité des données.",
+    "p7.result": "✅ Recommandations qualité données & plan d'action",
+    "p8.title": "Étude de santé publique — Sous-nutrition mondiale (FAO)",
+    "p8.desc": "Analyse des données FAO sur la sous-nutrition mondiale. Calcul de la proportion de personnes sous-alimentées (7,1 % en 2017). Identification des 10 pays les plus touchés et analyse de l'aide alimentaire internationale.",
+    "p8.result": "✅ 123 % de la population mondiale pourrait être nourrie avec les ressources disponibles",
+
+    "edu.tag": "Formations",
+    "edu.title": "Parcours académique",
+    "edu.sub": "Une formation pluridisciplinaire, du commerce à l'intelligence artificielle.",
+    "e1.title": "Mastère IA & Big Data (RNCP Niv. 6)",
+    "e2.title": "Mastère Marketing & Développement Commercial",
+    "e3.title": "Bachelor Marketing, Gestion & Commerce",
+    "e4.title": "Baccalauréat ES",
+
+    "car.tag": "Entreprises & Écoles",
+    "car.title": "Ils m'ont fait confiance",
+
+    "contact.title": "Parlons de votre projet data.",
+    "contact.sub": "Vous avez un projet data ? Une question ? Je suis disponible pour en discuter.",
+    "contact.cv": "⬇️ Télécharger mon CV",
+
+    "footer.text": "© 2025 Yannis TALLY · Data Analyst · Lyon, France"
+  },
+
+  en: {
+    "nav.about": "About",
+    "nav.expertise": "Expertise",
+    "nav.skills": "Skills",
+    "nav.exp": "Experience",
+    "nav.projects": "Projects",
+    "nav.contact": "Contact",
+
+    "hero.eyebrow": "Data Analyst · Orange France",
+    "hero.title": "From raw data<br />to informed decisions.",
+    "hero.sub": "Versatile, business-oriented, passionate about data value creation. I speak the language of algorithms as well as that of teams.",
+    "hero.cta1": "🔍 View my projects",
+    "hero.cta2": "✉️ Contact me",
+    "hero.cta3": "⬇️ Download my CV",
+
+    "diff.sectors": "Business sectors mastered",
+    "diff.exp": "Years of professional experience",
+    "diff.tools": "Data & AI tools",
+
+    "about.tag": "About",
+    "about.title": "A data profile grounded in reality.",
+    "about.p1": "Passionate about data and automation, I have built a rare profile: an analyst who understands business challenges before even opening a dataset.",
+    "about.p2": "My journey took me from Martinique to Lyon, from banking client relations to data analysis at Orange, through communication, quality and marketing. Each step strengthened my ability to adapt, understand real business needs and deliver meaningful analyses.",
+    "about.p3": "Today, within Orange's Data Factory, I design data pipelines, interactive dashboards and Python automations — always with one obsession: making data truly serve decision-making.",
+
+    "hl.poly": "Versatility",
+    "hl.poly.sub": "Banking, telecoms, retail, energy, agri-food…",
+    "hl.adapt": "Adaptability",
+    "hl.adapt.sub": "Martinique → Lyon, startup → large company",
+    "hl.ai": "AI & Prompting",
+    "hl.ai.sub": "ML, clustering, effective prompt writing",
+    "hl.data": "Data-driven",
+    "hl.data.sub": "SQL, Python, Power BI, GCP, Snowflake, DBT",
+
+    "sectors.tag": "Business expertise",
+    "sectors.title": "I understand your data<br />because I understood your business.",
+    "sectors.sub": "Thanks to my experience across different sectors, I approach every data project with a concrete understanding of operational challenges.",
+    "sec.bank": "Banking & Insurance",
+    "sec.bank.sub": "Risk management, client relations, financial KPIs, compliance",
+    "sec.telco": "Telecommunications",
+    "sec.telco.sub": "Operational steering, data factory, automation, reporting",
+    "sec.retail": "Retail & Distribution",
+    "sec.retail.sub": "Stock management, product quality, sales analysis",
+    "sec.energy": "Energy",
+    "sec.energy.sub": "Tenders, logistics, B2B communication",
+    "sec.agri": "Agri-food",
+    "sec.agri.sub": "International market study, country clustering, PESTEL",
+    "sec.mkt": "Marketing",
+    "sec.mkt.sub": "Dashboards, KPIs, business development strategy",
+    "sec.btp": "Construction",
+    "sec.btp.sub": "Project tracking, cost and deliverable management",
+
+    "skills.tag": "Skills",
+    "skills.title": "My toolbox",
+    "skills.sub": "Strong technical skills serving a business-oriented vision.",
+    "sk.viz": "Analysis & Visualisation",
+    "sk.db": "Databases & Querying",
+    "sk.dev": "Programming & Automation",
+    "sk.cloud": "Cloud & Infrastructure",
+    "sk.ai": "Artificial Intelligence & ML",
+    "sk.soft": "Soft Skills",
+    "skill.excel": "Advanced Excel",
+    "skill.logreg": "Logistic Regression",
+    "skill.popularization": "Popularization",
+    "skill.analytical": "Analytical mindset",
+    "skill.adaptability": "Adaptability",
+    "skill.teamwork": "Teamwork",
+    "skill.proactivity": "Proactivity",
+
+    "exp.tag": "Experience",
+    "exp.title": "Professional background",
+    "exp.sub": "A cross-functional career shaped by varied environments and concrete responsibilities.",
+    "xp1.meta": "Sept. 2024 – Sept. 2026 · Lyon, France",
+    "xp1.title": "Junior Data Analyst (Work-study)",
+    "xp1.company": "Orange — Intervention Department (DINT) · Data Factory",
+    "xp1.b1": "Improving data reliability and value through processing and cleaning",
+    "xp1.b2": "Designing reference databases for the Data Factory",
+    "xp1.b3": "End-to-end project management: scoping, deployment, stakeholder support",
+    "xp1.b4": "Creating custom visualizations to support decision-making",
+    "xp1.b5": "Developing Python automations to improve operational performance",
+    "xp2.meta": "Oct. 2022 – Oct. 2023 · Vénissieux, France",
+    "xp2.title": "Personal Banking Advisor (Permanent contract)",
+    "xp2.company": "Crédit Agricole Centre-Est",
+    "xp2.b1": "Managing a client portfolio and providing proactive support through digital tools",
+    "xp2.b2": "Training and onboarding new employees",
+    "xp2.b3": "Managing account-related risks and compliance",
+    "xp3.meta": "Sept. 2020 – present · Martinique",
+    "xp3.title": "Communications & Administrative Officer",
+    "xp3.company": "Sageer Caraïbes",
+    "xp3.b1": "Defining and implementing communication actions",
+    "xp3.b2": "Creating print and web materials, email campaigns",
+    "xp3.b3": "Responding to tenders, event logistics",
+    "xp4.meta": "Feb. – Jun. 2020 · France",
+    "xp4.title": "Pastry Quality Manager",
+    "xp4.company": "Carrefour Cluny",
+    "xp4.b1": "Managing the quality process and implementing tools compliant with sanitary standards",
+    "xp4.b2": "Managing more than 40 product references (stock, shelving, quality control)",
+
+    "tool.client": "Customer relations",
+    "tool.finance": "Financial analysis",
+    "tool.bankdigital": "Digital banking tools",
+    "tool.project": "Project management",
+    "tool.quality": "Quality",
+    "tool.stock": "Stock management",
+    "tool.rigor": "Operational rigor",
+    "tool.stats": "Statistical tests",
+    "tool.mapping": "Mapping",
+    "tool.statistics": "Statistics",
+
+    "proj.tag": "Projects",
+    "proj.title": "Project selection",
+    "proj.sub": "Concrete and varied projects, from data exploration to strategic recommendations.",
+    "p1.title": "Counterfeit banknote detection (ML)",
+    "p1.desc": "Analysis of 1,500 scanned banknotes for ONCFM. Testing and comparison of 4 ML algorithms (Logistic Regression, KNN, Random Forest, K-Means). Deployment of a functional application.",
+    "p1.result": "✅ Best accuracy: 99.33%",
+    "p2.title": "Sales analysis — Lapage Bookstore",
+    "p2.desc": "Full exploratory analysis, statistical tests (Chi-square, Spearman, Kruskal-Wallis), identification of the core target (ages 35–55), actionable B2B strategic recommendations.",
+    "p2.result": "✅ Actionable strategic recommendations",
+    "p3.title": "International market study — Agri-food",
+    "p3.desc": "Identification of target markets for the international expansion of an organic chicken company. Clustering of 6 country profiles using PCA.",
+    "p3.result": "✅ Recommendation: Germany, Netherlands, Saudi Arabia, China",
+    "p4.title": "Sociodemographic monitoring of Data students",
+    "p4.desc": "Complete data processing pipeline (staging, tests, intermediate). Analysis of male/female distribution by region and enrollment trends.",
+    "p4.result": "✅ Recommendations to encourage more women into data careers",
+    "p5.title": "Project tracking cockpit (Power BI)",
+    "p5.desc": "Interactive multi-view dashboard: monitoring costs, deadlines and deliverables. Geographic and categorical analysis. Full documentation of the data model.",
+    "p5.result": "✅ Complete dashboard with DAX and relational model",
+    "p6.title": "Access to drinking water worldwide",
+    "p6.desc": "Global, continental and national visualization of access to drinking water. Analysis of the impact of political stability on water-related mortality.",
+    "p6.result": "✅ Multi-level interactive mapping",
+    "p7.title": "Sales analysis — BottleNeck (Wine shop)",
+    "p7.desc": "Merged data from an e-commerce website and an ERP. Univariate price analysis, revenue/stock/margin correlations. Identification of data entry anomalies and recommendations to improve data quality.",
+    "p7.result": "✅ Data quality recommendations & action plan",
+    "p8.title": "Public health study — Global undernutrition (FAO)",
+    "p8.desc": "Analysis of FAO data on global undernutrition. Calculation of the proportion of undernourished people (7.1% in 2017). Identification of the 10 most affected countries and analysis of international food aid.",
+    "p8.result": "✅ 123% of the world's population could be fed with available resources",
+
+    "edu.tag": "Education",
+    "edu.title": "Academic background",
+    "edu.sub": "A multidisciplinary education, from business to artificial intelligence.",
+    "e1.title": "Master's in AI & Big Data (RNCP Level 6)",
+    "e2.title": "Master's in Marketing & Business Development",
+    "e3.title": "Bachelor's in Marketing, Management & Commerce",
+    "e4.title": "French Baccalaureate in Economics",
+
+    "car.tag": "Companies & Schools",
+    "car.title": "They trusted me",
+
+    "contact.title": "Let's talk about your data project.",
+    "contact.sub": "Do you have a data project? A question? I am available to discuss it.",
+    "contact.cv": "⬇️ Download my CV",
+
+    "footer.text": "© 2025 Yannis TALLY · Data Analyst · Lyon, France"
+  },
+
+  es: {
+    "nav.about": "Sobre mí",
+    "nav.expertise": "Experiencia",
+    "nav.skills": "Competencias",
+    "nav.exp": "Experiencias",
+    "nav.projects": "Proyectos",
+    "nav.contact": "Contacto",
+
+    "hero.eyebrow": "Analista de Datos · Orange Francia",
+    "hero.title": "De los datos brutos<br />a decisiones informadas.",
+    "hero.sub": "Versátil, orientado al negocio y apasionado por la valorización de los datos. Hablo tanto el lenguaje de los algoritmos como el de los equipos.",
+    "hero.cta1": "🔍 Ver mis proyectos",
+    "hero.cta2": "✉️ Contactarme",
+    "hero.cta3": "⬇️ Descargar mi CV",
+
+    "diff.sectors": "Sectores dominados",
+    "diff.exp": "Años de experiencia profesional",
+    "diff.tools": "Herramientas de datos e IA",
+
+    "about.tag": "Sobre mí",
+    "about.title": "Un perfil de datos anclado en la realidad.",
+    "about.p1": "Apasionado por los datos y la automatización, he construido un perfil poco común: el de un analista que comprende los desafíos del negocio incluso antes de abrir un dataset.",
+    "about.p2": "Mi recorrido me llevó de Martinica a Lyon, de la relación con clientes bancarios al análisis de datos en Orange, pasando por la comunicación, la calidad y el marketing. Cada etapa reforzó mi capacidad de adaptación, de comprensión de las necesidades reales de los equipos y de producción de análisis con sentido.",
+    "about.p3": "Hoy, dentro de la Data Factory de Orange, diseño pipelines de datos, cuadros de mando interactivos y automatizaciones en Python, con una obsesión constante: que los datos sirvan realmente para la toma de decisiones.",
+
+    "hl.poly": "Polivalencia",
+    "hl.poly.sub": "Banca, telecomunicaciones, comercio, energía, agroalimentación…",
+    "hl.adapt": "Adaptabilidad",
+    "hl.adapt.sub": "Martinica → Lyon, startup → gran grupo",
+    "hl.ai": "IA y Prompting",
+    "hl.ai.sub": "ML, clustering, redacción de prompts eficaces",
+    "hl.data": "Orientado por datos",
+    "hl.data.sub": "SQL, Python, Power BI, GCP, Snowflake, DBT",
+
+    "sectors.tag": "Experiencia sectorial",
+    "sectors.title": "Comprendo sus datos<br />porque comprendí su negocio.",
+    "sectors.sub": "Gracias a mis experiencias en sectores variados, abordo cada proyecto de datos con una comprensión concreta de los desafíos operativos.",
+    "sec.bank": "Banca y Seguros",
+    "sec.bank.sub": "Gestión de riesgos, relación con clientes, KPI financieros, cumplimiento",
+    "sec.telco": "Telecomunicaciones",
+    "sec.telco.sub": "Gestión operativa, data factory, automatización, reporting",
+    "sec.retail": "Comercio y Distribución",
+    "sec.retail.sub": "Gestión de stock, calidad de producto, análisis de ventas",
+    "sec.energy": "Energía",
+    "sec.energy.sub": "Licitaciones, logística, comunicación B2B",
+    "sec.agri": "Agroalimentación",
+    "sec.agri.sub": "Estudio de mercado internacional, clustering de países, PESTEL",
+    "sec.mkt": "Marketing",
+    "sec.mkt.sub": "Cuadros de mando, KPI, estrategia de desarrollo comercial",
+    "sec.btp": "Construcción",
+    "sec.btp.sub": "Seguimiento de proyectos, gestión de costes y entregables",
+
+    "skills.tag": "Competencias",
+    "skills.title": "Mi caja de herramientas",
+    "skills.sub": "Competencias técnicas sólidas al servicio de una visión orientada al negocio.",
+    "sk.viz": "Análisis y Visualización",
+    "sk.db": "Bases de datos y Consultas",
+    "sk.dev": "Programación y Automatización",
+    "sk.cloud": "Cloud e Infraestructura",
+    "sk.ai": "Inteligencia Artificial y ML",
+    "sk.soft": "Habilidades Blandas",
+    "skill.excel": "Excel Avanzado",
+    "skill.logreg": "Regresión Logística",
+    "skill.popularization": "Divulgación",
+    "skill.analytical": "Pensamiento analítico",
+    "skill.adaptability": "Adaptabilidad",
+    "skill.teamwork": "Trabajo en equipo",
+    "skill.proactivity": "Proactividad",
+
+    "exp.tag": "Experiencias",
+    "exp.title": "Trayectoria profesional",
+    "exp.sub": "Una trayectoria transversal, forjada en entornos variados y responsabilidades concretas.",
+    "xp1.meta": "Sept. 2024 – Sept. 2026 · Lyon, Francia",
+    "xp1.title": "Data Analyst Junior (Alternancia)",
+    "xp1.company": "Orange — Dirección de Intervención (DINT) · Data Factory",
+    "xp1.b1": "Fiabilización y valorización de datos mediante tratamiento y limpieza",
+    "xp1.b2": "Diseño de bases de datos de referencia para la Data Factory",
+    "xp1.b3": "Gestión integral de proyectos: definición, despliegue y acompañamiento",
+    "xp1.b4": "Creación de visualizaciones a medida para facilitar la toma de decisiones",
+    "xp1.b5": "Desarrollo de automatizaciones en Python para mejorar el rendimiento operativo",
+    "xp2.meta": "Oct. 2022 – Oct. 2023 · Vénissieux, Francia",
+    "xp2.title": "Asesor Financiero Particular (Contrato indefinido)",
+    "xp2.company": "Crédit Agricole Centre-Est",
+    "xp2.b1": "Gestión de cartera de clientes y acompañamiento proactivo mediante herramientas digitales",
+    "xp2.b2": "Formación e integración de nuevos colaboradores",
+    "xp2.b3": "Control de riesgos asociados a las cuentas y cumplimiento",
+    "xp3.meta": "Sept. 2020 – presente · Martinica",
+    "xp3.title": "Responsable de Comunicación y Administrativo",
+    "xp3.company": "Sageer Caraïbes",
+    "xp3.b1": "Definición e implementación de acciones de comunicación",
+    "xp3.b2": "Elaboración de soportes impresos y web, campañas de emailing",
+    "xp3.b3": "Respuesta a licitaciones y logística de eventos",
+    "xp4.meta": "Feb. – Jun. 2020 · Francia",
+    "xp4.title": "Responsable de Calidad en Pastelería",
+    "xp4.company": "Carrefour Cluny",
+    "xp4.b1": "Gestión del proceso de calidad e implementación de herramientas conforme a normas sanitarias",
+    "xp4.b2": "Gestión de más de 40 referencias de productos (stock, reposición, control de calidad)",
+
+    "tool.client": "Relación con clientes",
+    "tool.finance": "Análisis financiero",
+    "tool.bankdigital": "Herramientas bancarias digitales",
+    "tool.project": "Gestión de proyectos",
+    "tool.quality": "Calidad",
+    "tool.stock": "Gestión de stock",
+    "tool.rigor": "Rigor operativo",
+    "tool.stats": "Pruebas estadísticas",
+    "tool.mapping": "Cartografía",
+    "tool.statistics": "Estadísticas",
+
+    "proj.tag": "Proyectos",
+    "proj.title": "Selección de proyectos",
+    "proj.sub": "Proyectos concretos y variados, desde la exploración de datos hasta recomendaciones estratégicas.",
+    "p1.title": "Detección de billetes falsos (ML)",
+    "p1.desc": "Análisis de 1.500 billetes escaneados para la ONCFM. Prueba y comparación de 4 algoritmos de ML (Regresión Logística, KNN, Random Forest, K-Means). Despliegue de una aplicación funcional.",
+    "p1.result": "✅ Mejor precisión: 99,33 %",
+    "p2.title": "Análisis de ventas — Librería Lapage",
+    "p2.desc": "Análisis exploratorio completo, pruebas estadísticas (Chi-cuadrado, Spearman, Kruskal-Wallis), identificación del público objetivo principal (35–55 años), recomendaciones estratégicas B2B.",
+    "p2.result": "✅ Recomendaciones estratégicas accionables",
+    "p3.title": "Estudio de mercado internacional — Agroalimentación",
+    "p3.desc": "Identificación de mercados objetivo para la expansión internacional de una empresa de pollo ecológico. Clustering de 6 perfiles de países mediante ACP.",
+    "p3.result": "✅ Recomendación: Alemania, Países Bajos, Arabia Saudí, China",
+    "p4.title": "Seguimiento sociodemográfico de estudiantes de Data",
+    "p4.desc": "Pipeline completo de tratamiento de datos (staging, tests, intermediate). Análisis de la distribución hombres/mujeres por región y evolución de las inscripciones.",
+    "p4.result": "✅ Recomendaciones para feminizar el sector data",
+    "p5.title": "Panel de seguimiento de proyectos (Power BI)",
+    "p5.desc": "Cuadro de mando interactivo multivista: seguimiento de costes, plazos y entregables. Análisis geográfico y categórico. Documentación completa del modelo de datos.",
+    "p5.result": "✅ Dashboard completo con DAX y modelo relacional",
+    "p6.title": "Acceso al agua potable en el mundo",
+    "p6.desc": "Visualización mundial, continental y nacional del acceso al agua potable. Análisis del impacto de la estabilidad política sobre la mortalidad relacionada con el agua.",
+    "p6.result": "✅ Cartografía interactiva multinivel",
+    "p7.title": "Análisis de ventas — BottleNeck (Vinoteca)",
+    "p7.desc": "Fusión de datos procedentes de un sitio e-commerce y de un ERP. Análisis univariante de precios, correlaciones facturación/stock/márgenes. Identificación de anomalías de captura y recomendaciones para mejorar la calidad de los datos.",
+    "p7.result": "✅ Recomendaciones de calidad de datos y plan de acción",
+    "p8.title": "Estudio de salud pública — Subnutrición mundial (FAO)",
+    "p8.desc": "Análisis de los datos de la FAO sobre subnutrición mundial. Cálculo de la proporción de personas subalimentadas (7,1 % en 2017). Identificación de los 10 países más afectados y análisis de la ayuda alimentaria internacional.",
+    "p8.result": "✅ El 123 % de la población mundial podría ser alimentada con los recursos disponibles",
+
+    "edu.tag": "Formación",
+    "edu.title": "Trayectoria académica",
+    "edu.sub": "Una formación multidisciplinaria, del comercio a la inteligencia artificial.",
+    "e1.title": "Máster en IA y Big Data (RNCP Nivel 6)",
+    "e2.title": "Máster en Marketing y Desarrollo Comercial",
+    "e3.title": "Bachelor en Marketing, Gestión y Comercio",
+    "e4.title": "Bachillerato ES",
+
+    "car.tag": "Empresas y Escuelas",
+    "car.title": "Han confiado en mí",
+
+    "contact.title": "Hablemos de su proyecto de datos.",
+    "contact.sub": "¿Tiene un proyecto de datos? ¿Una pregunta? Estoy disponible para hablar de ello.",
+    "contact.cv": "⬇️ Descargar mi CV",
+
+    "footer.text": "© 2025 Yannis TALLY · Analista de Datos · Lyon, Francia"
+  },
+
+  cr: {
+    "nav.about": "Asou mwen",
+    "nav.expertise": "Sa an sa fè",
+    "nav.skills": "Konpétans",
+    "nav.exp": "Sa an ja fè",
+    "nav.projects": "Travay mwen",
+    "nav.contact": "Kontak",
+
+    "hero.eyebrow": "Analis doné · Orange France",
+    "hero.title": "Rivé épi an doné tjo-kan-blok<br />pati épi an désizyon klè kon dlo roche.",
+    "hero.sub": "Débrouya, an ka mété lanmou adan sa an ka fè. Mwen toujou ka gadé pou ba chak analiz an sans métié.  Ki sé algoritm ou moun an sav ki jan pou palé pou yo sa konprann mwen.",
+    "hero.cta1": "🔍 Gadé sa an ja fè",
+    "hero.cta2": "✉️ Kriyé mwen",
+    "hero.cta3": "⬇️ An nou pran CV mwen",
+
+    "diff.sectors": "Sèktè métié ola an mèt",
+    "diff.exp": "Lanné ekspéryans pwofésyonèl",
+    "diff.tools": "Zouti data ek IA an ka isé",
+
+    "about.tag": "Asou mwen",
+    "about.title": "An pwofil data ki konet réyalité-a.",
+    "about.p1": "Pasyoné di data ek otomatizasyon, an rivé trapé an pwofil ki zot pé ké joinn tout koté : an analis di doné ki ka konprann biznes la avan mem ouvè an dataset.",
+    "about.p2": "Soti Matnik rivé Lyon, soti an bank pou débatjé adan data kay Orange, an pran an chimen ki fé mwen wè an lo péyi, an lo métié : kominikasyon, kalité, maketing etc. Chak ti pa sé an lison biznes, an lison débrouya.",
+    "about.p3": "Jòdi-jou, adan Data Factory Orange, mwen ka fè dé pipeline doné, dashboard entéraktif ek otomatizasyon Python — épi an sèl lidé : fòk doné a ni an potalans pou lé moun lan sa pran an désizyon.",
+
+    "hl.poly": "Débrouya",
+    "hl.poly.sub": "Labank, télékom, komès, énèji, agroalimentè…",
+    "hl.adapt": "An sa mofwazé (mwen ka palé di biznes !) ",
+    "hl.adapt.sub": "Matinik → Lyon, startup → gran gwoup",
+    "hl.ai": "IA é Prompting",
+    "hl.ai.sub": "ML, clustering, rédaksyon prompt ki ni potalans",
+    "hl.data": "Data-driven",
+    "hl.data.sub": "SQL, Python, Power BI, GCP, Snowflake, DBT",
+
+    "sectors.tag": "Ekspètiz métié",
+    "sectors.title": "Mwen ka konprann doné a zot<br />pas mwen ja konprann métié a zot.",
+    "sectors.sub": "Gras a ekspéryans mwen adan pliziè sektè, koumansé an koumansé pwojè data a, an ja ni an lidé métié ek biznes di pwojè a.",
+    "sec.bank": "Labank ek Asirans",
+    "sec.bank.sub": "Jèstyon risk, rilasyon kliyan, KPI finans, konfowmité",
+    "sec.telco": "Télékominikasyon",
+    "sec.telco.sub": "Pilotaj opérasyonèl, data factory, otomatizasyon, riporting",
+    "sec.retail": "Komès épi Distribisyon",
+    "sec.retail.sub": "Jèstyon stok, kalité machandiz la, analiz vant",
+    "sec.energy": "Enèji",
+    "sec.energy.sub": "Apèl dof, lojistik, kominikasyon B2B",
+    "sec.agri": "Agroalimantè",
+    "sec.agri.sub": "konprann maché entènasyonal, clustering, PESTEL",
+    "sec.mkt": "Makéting",
+    "sec.mkt.sub": "Dashboard, KPI, estratéji dévlòpman komès",
+    "sec.btp": "BTP",
+    "sec.btp.sub": "Suiv pwojè, jèstyon kou ek livrab",
+
+    "skills.tag": "Konpétans",
+    "skills.title": "Bwat zouti",
+    "skills.sub": "Bon konpétans teknik, ba an vizyon métié.",
+    "sk.viz": "Analiz ek Vizyalizasyon",
+    "sk.db": "Baz doné ek Rikèt",
+    "sk.dev": "Pwogramasyon ek otomatizasyon",
+    "sk.cloud": "Cloud ek Enfrastrikti",
+    "sk.ai": "Entélijans Atifisyèl ek ML",
+    "sk.soft": "Soft Skills",
+    "skill.excel": "Excel Avansé",
+    "skill.logreg": "Régrésion Logistik",
+    "skill.popularization": "Eksplikasyon pou tout moun sa konprann",
+    "skill.analytical": "Lèspri analiz",
+    "skill.adaptability": "An sa mofwazé (mwen ka palé di biznes !)",
+    "skill.teamwork": "Travay létjip",
+    "skill.proactivity": "Fè douvan",
+
+    "exp.tag": "Ékspéryans",
+    "exp.title": "Chimen pwofésyonèl",
+    "exp.sub": "An chimen pwofésionèl ki ka join pliziè métié ek pliziè responsabilité.",
+    "xp1.meta": "Sèpt. 2024 – Sèpt. 2026 · Lyon, France",
+    "xp1.title": "Junior Data Analyst (Alternance)",
+    "xp1.company": "Orange — Direction de l'Intervention (DINT) · Data Factory",
+    "xp1.b1": "Rann doné a pli fyab ek bay plis potalans gras a an mofwazaj",
+    "xp1.b2": "Konsèpsyon di an baz doné référans ba la Data Factory",
+    "xp1.b3": "Pilotaj pwojé dépi i net jiska lanmoy: kadréy, fey maché, akonpagné lé kolaboratè",
+    "xp1.b4": "Kréyasyon vizyalizasyon obidjoul pou sa pran an désizyon san fè érè",
+    "xp1.b5": "Dévlòpman otomatizasyon Python pou amélyoré pèfòmans opérasyonèl",
+    "xp2.meta": "Okt. 2022 – Okt. 2023 · Vénissieux, France",
+    "xp2.title": "Konséyé finansyé ba moun (CDI)",
+    "xp2.company": "Crédit Agricole Centre-Est",
+    "xp2.b1": "Jéré an pòtfèy kliyan ek fè bon akonpanieman épi zouti dijital",
+    "xp2.b2": "Fòmé ek entégré lé nouvo kolaboratè",
+    "xp2.b3": "Métrizé risk la ki ka ay épi kont ek konfowmité",
+    "xp3.meta": "Sèpt. 2020 – jòdi-a · Matinik",
+    "xp3.title": "Chajé kominikasyon épi administratif",
+    "xp3.company": "Sageer Caraïbes",
+    "xp3.b1": "Mété doubout aksyon kominikasyon",
+    "xp3.b2": "Élaboré sipò print ek web, kanpannye emailing",
+    "xp3.b3": "Réponn apèl dòf, lojistik évènman",
+    "xp4.meta": "Fév. – Jen 2020 · France",
+    "xp4.title": "Responsab kalité patisri",
+    "xp4.company": "Carrefour Cluny",
+    "xp4.b1": "Jéré prosésis kalité épi mèt an doubout zouti an akò épi nòrm sanitè",
+    "xp4.b2": "Jéré plis ki 40 référans machandiz (stok, miz an ray, kontwòl kalité)",
+
+    "tool.client": "Rilasyon kliyan",
+    "tool.finance": "Analiz finansyé",
+    "tool.bankdigital": "Zouti dijital labank",
+    "tool.project": "Jèstyon pwojé",
+    "tool.quality": "Kalité",
+    "tool.stock": "Jèstyon stok",
+    "tool.rigor": "Séryé operasyonèl",
+    "tool.stats": "Tès estatistik",
+    "tool.mapping": "Katografi",
+    "tool.statistics": "Es Statistik",
+
+    "proj.tag": "Pwojè",
+    "proj.title": "Séléksyon pwojè",
+    "proj.sub": "Pwojè konkré ek divès, dépi eksplorasyon doné jis rikomandasyon stratéjik.",
+    "p1.title": "Déteksyon di fo biyè (ML)",
+    "p1.desc": "Analiz di 1 500 biyè scanné pou ONCFM. Tès épi konparézon di 4 algoritm ML (Régrésion Logistik, KNN, Random Forest, K-Means). Fè an aplikasyon ki fonksyonnèl.",
+    "p1.result": "✅ Pli bon accuracy : 99,33%",
+    "p2.title": "Analiz vant — Librairi Lapage",
+    "p2.desc": "Analiz eksploratwa konplè, tès estatistik (Khi², Spearman, Kruskal-Wallis), idantifikasyon kè sib-la (35–55 lanné), rikomandasyon stratéjik BtoB.",
+    "p2.result": "✅ Rikomandasyon stratéjik ki aplikab",
+    "p3.title": "Étidé maché entènasyonal — Agroalimentè",
+    "p3.desc": "Idantifikasyon maché sib pou an agrandisman entènasyonal an lantrepriz poul biyolojik. Clustering 6 pwofil péyi gras a ACP.",
+    "p3.result": "✅ Rikomandasyon : Alman, Peyi-Ba, Arabi Saoudit, Lachin",
+    "p4.title": "Swivi sosyodémografik étidyan Data",
+    "p4.desc": "Pipeline konplè pou tretman doné (staging, tests, intermediate). Analiz répartisyon nonm/fanm pa réjyon, ek évolisyon enskripsyon.",
+    "p4.result": "✅ Rikomandasyon pou sa féminizé filyè data-a",
+    "p5.title": "Cockpit swivi pwojè (Power BI)",
+    "p5.desc": "Tablo débò entéraktif plizyè-viz : swivi kou, échéans ek livrabl. Analiz jéografik ek kategorièl. Dokimantasyon konplè di modèl donnè-a.",
+    "p5.result": "✅ Dashboard konplè épi DAX ek modèl relasyonèl",
+    "p6.title": "Aksè a dlo potab oliwon la tè",
+    "p6.desc": "Vizyalizasyon mondyal, kontinan ek nasyonal di aksè a dlo potab. Analiz enpakt stabilité politik asou lanmò di fèt ki dlo a sal.",
+    "p6.result": "✅ Katografi entéraktif plizyè nivo",
+    "p7.title": "Analiz vant — BottleNeck (Kav a ven)",
+    "p7.desc": "Fuzion doné ki sòti ldi an sit e-commerce ek an ERP. Analiz univaryé di pri a, korélasyon CA/stok/marj. Idantifikasyon anomali matjé ek rikomandasyon pou sa amelyoré kalité doné a.",
+    "p7.result": "✅ Rikomandasyon kalité donnè é plan daction",
+    "p8.title": "Létid asou la santé piblik — Sou-nitrisyon mondyal (FAO)",
+    "p8.desc": "Analiz doné FAO anlè sou-nitrisyon oliwon la tè. Kalkil pwopòsyon moun ki malnouri (7,1 % an 2017). Idantifikasyon di 10 péyi ki ka soufè plis ek analiz di èd alimantè entènasyonal.",
+    "p8.result": "✅ 123 % popilasyon mondyal té ké pé manjé épi sa nou ni kon resous",
+
+    "edu.tag": "Fòmasyon",
+    "edu.title": "Parcours akadémik",
+    "edu.sub": "An fòmasyon pliridisiplinè, dépi komès jis entélijans atifisyèl.",
+    "e1.title": "Mastè IA é Big Data (RNCP Niv. 6)",
+    "e2.title": "Mastè Maketing ek Dévlòpman Komèsyal",
+    "e3.title": "Bachelor Maketing, Jèstyon ek Komès",
+    "e4.title": "Bakaloa ES",
+
+    "car.tag": "Antrepriz épi Lékol",
+    "car.title": "Yo fè mwen konfyans",
+
+    "contact.title": "An nou palé di pwojé data zot.",
+    "contact.sub": "Zot ni an pwojé data ? An kèsyon ? Kriyé mwen pou palé di sa.",
+    "contact.cv": "⬇️ An ni pran CV an mwen",
+
+    "footer.text": "© 2025 Yannis TALLY · Analis donnè · Lyon, France"
+  }
+};
+
+function setLang(lang, event) {
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+}
+</script>
+
+</body>
+</html>
